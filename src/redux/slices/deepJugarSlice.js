@@ -4,7 +4,6 @@ import { createSlice } from '@reduxjs/toolkit'
 const deepJugarSlice = createSlice({
   name: 'deepJugar',
   initialState: {
-    
     messages: [{ from: 'system', text: 'Welcome to Deep Jugar Chat!' }],
   },
   reducers: {
@@ -12,10 +11,10 @@ const deepJugarSlice = createSlice({
       state.messages.push(action.payload)
     },
     clearDeepChat(state) {
-      state.messages = []
+      state.messages = [{ from: 'system', text: 'Welcome to Deep Jugar Chat!' }]
     },
   },
 })
 
 export const { addDeepMessage, clearDeepChat } = deepJugarSlice.actions
-export default deepJugarSlice.reducer   // ✅ ye hona hi chahiye
+export default deepJugarSlice.reducer

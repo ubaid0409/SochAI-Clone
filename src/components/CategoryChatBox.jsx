@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { addCategoryMessage } from "../redux/slices/categoryChatSlice"
 import { useState, useRef, useEffect } from "react"
 import { useCategoryGemini } from "../hooks/useCategoryGemini" // Add this import
+import { logout } from '../redux/slices/authSlice'
 
 export default function CategoryChatBox({ category }) {
   const dispatch = useDispatch()
@@ -34,50 +35,54 @@ export default function CategoryChatBox({ category }) {
   const hasUserSentMessage = messages.some(m => m.from === "me")
 
   return (
-    <div className="flex flex-col h-[calc(100vh-56px)]">
+    <div className="flex flex-col h-[calc(100vh-56px)] mt-2">
 
       {/* 🔹 Messages list */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+      <div className="flex-1 overflow-y-auto p-4 scrollbar-hide">
 
         {/* Heading only if user hasn't sent any message */}
         {!hasUserSentMessage && (
-          <div className="text-center font-bold text-lg text-white/90 my-4">
-            Let's help with {title}
-          </div>
-        )}
-
-        {messages.map((m, idx) => (
-          m.from !== 'system' && (
-            <div
-              key={idx}
-              className={`max-w-[75%] rounded-xl p-3 ${m.from === 'me'
-                  ? 'ml-auto bg-blue-500/10'
-                  : 'bg-white/10'
-                }`}
-            >
-              <div>{m.text}</div>
+          <div className="flex flex-col items-center justify-center h-full gap-4">
+            <div className="text-center font-bold text-3xl text-white/90">
+              Let's help with {title}
             </div>
-          )
-        ))}
+          </div>
+          )}
 
-        <div ref={endRef} />
+            {messages.map((m, idx) => (
+              m.from !== 'system' && (
+                <div
+                  key={idx}
+                  className={`max-w-[75%] rounded-xl p-3 ${m.from === 'me'
+                    ? 'ml-auto mt-1 bg-blue-500/10'
+                    : 'bg-white/10 mt-1'
+                    }`}
+                >
+                  <div>{m.text}</div>
+                </div>
+              )
+            ))}
+
+            <div ref={endRef} />
       </div>
 
-      {/* 🔹 Input box */}
-      <div className="border-t border-white/10 p-3 flex gap-2">
-        <input
-          className="flex-1 px-4 py-2 rounded-xl bg-white/10 outline-none"
-          placeholder={`Type message in ${title}...`}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && send()}
-        />
-        <button
-          className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 transition"
-          onClick={send}
-        >
-          Send
-        </button>
+      {/* Input Box */}
+      <div className="w-full flex justify-center mb-16">
+        <div className="flex w-full max-w-2xl border rounded-xl">
+          <input
+            className="flex-1 px-4 py-2 bg-transparent text-white"
+            placeholder="Let's Chat"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => (e.key === 'Enter' ? send() : null)}
+          />
+          <button
+            className="px-4 py-2 bg-transparent"
+            onClick={send}
+          >
+            Send
+          </button>
+        </div>
       </div>
     </div>
   )

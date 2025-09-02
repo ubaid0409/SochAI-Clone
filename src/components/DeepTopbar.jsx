@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function DeepTopbar() {
   return (
-    <div className="fixed top-0 left-64 right-0 z-30 bg-neutral-950/80 backdrop-blur border-b border-white/10 h-14">
+    <div className="fixed top-0 left-64 right-0 z-30 bg-neutral-800 backdrop-blur  rounded-md  h-16 ml-3 mr-3">
       <div className="flex items-center justify-between h-full px-6">
         
         {/* Left section */}

@@ -7,7 +7,7 @@ import DeepTopbar from '../../components/DeepTopbar'
 export default function DeepJugarLayout({ children }) {
   useRequireAuth()
   return (
-    <div className="min-h-screen bg-neutral-950 text-white">
+    <div className="min-h-screen bg-neutral-900 text-white">
       {/* 🔹 Topbar always on top */}
       <DeepTopbar />
 

@@ -7,7 +7,7 @@ export default function ChatLayout({ children }) {
   useRequireAuth()
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-white">
+    <div className="min-h-screen bg-neutral-900 text-white">
       {/* 🔹 Topbar always on top */}
       <Topbar />
 
@@ -16,7 +16,7 @@ export default function ChatLayout({ children }) {
         <Sidebar />
 
         {/* 🔹 Main content with gap from Topbar */}
-        <main className="flex-1 pt-14 px-6">
+        <main className="flex-1 pt-14 ">
           {children}
         </main>
       </div>
